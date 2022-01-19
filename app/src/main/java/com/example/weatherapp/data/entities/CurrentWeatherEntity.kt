@@ -1,14 +1,22 @@
 package com.example.weatherapp.data.entities
 
 import androidx.room.*
-import java.text.SimpleDateFormat
 import java.util.*
 
+/**
+ * Place has 1:1 relation with current weather details.
+ */
 @Entity(tableName = "current_weather")
 data class CurrentWeatherEntity(
     @PrimaryKey
     val date: Date,
-    val city: String
+    val city: String,
+    val temperature: Float,
+    val humidity: Float,
+    val windSpeed: Float,
+    val pressure: Float,
+    val sunrise: String,
+    val sunset: String,
 )
 
 data class CurrentWeatherAndPlace(
@@ -19,16 +27,3 @@ data class CurrentWeatherAndPlace(
     )
     val library: CurrentWeatherEntity
 )
-
-class DateConverter {
-
-    @TypeConverter
-    fun fromDate(date: Date): String {
-        return SimpleDateFormat("EEE, dd MMM", Locale.getDefault()).format(date)
-    }
-
-    @TypeConverter
-    fun toDate(date: String): Date {
-        return SimpleDateFormat("yyyy-MM-dd").parse(date)
-    }
-}
