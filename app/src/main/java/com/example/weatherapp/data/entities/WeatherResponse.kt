@@ -1,9 +1,7 @@
 package com.example.weatherapp.data.entities
 
-import androidx.room.Entity
 import com.google.gson.annotations.SerializedName
 
-@Entity(tableName = "weather")
 data class WeatherResponse(
     val latitude: Float,
     val longitude: Float,
@@ -15,7 +13,6 @@ data class WeatherResponse(
     val currentWeather: CurrentWeather,
 )
 
-@Entity(tableName = "weather_forecast")
 data class WeatherForecast(
     @SerializedName("datetime")
     val date: String,
@@ -33,7 +30,6 @@ data class WeatherForecast(
     val sunset: String,
 )
 
-@Entity(tableName = "current_weather")
 data class CurrentWeather(
     @SerializedName("datetime")
     val date: String,
