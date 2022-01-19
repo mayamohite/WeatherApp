@@ -3,6 +3,7 @@ package com.example.weatherapp.di
 import android.content.Context
 import androidx.room.Room
 import com.example.weatherapp.data.db.WEATHER_DATABASE
+import com.example.weatherapp.data.db.WeatherDao
 import com.example.weatherapp.data.db.WeatherDatabase
 import dagger.Module
 import dagger.Provides
@@ -22,5 +23,10 @@ class DatabaseModule {
             applicationContext,
             WeatherDatabase::class.java, WEATHER_DATABASE
         ).build()
+    }
+
+    @Provides
+    fun provideChannelDao(appDatabase: WeatherDatabase): WeatherDao {
+        return appDatabase.getWeatherDao()
     }
 }

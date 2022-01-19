@@ -20,10 +20,10 @@ data class CurrentWeatherEntity(
 )
 
 data class CurrentWeatherAndPlace(
-    @Embedded val user: PlaceEntity,
+    @Embedded val placeDetails: PlaceEntity,
     @Relation(
         parentColumn = "placeName",
         entityColumn = "city"
     )
-    val library: CurrentWeatherEntity
+    val currentWeather: CurrentWeatherEntity
 )

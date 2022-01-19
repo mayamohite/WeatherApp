@@ -13,6 +13,4 @@ interface WeatherDao {
     @Transaction
     @Query("SELECT * FROM place")
     fun getCurrentWeather(): List<CurrentWeatherAndPlace>
-
-    fun insertCurrentWeatherForCity()
 }

@@ -31,5 +31,5 @@ ext{
     hiltVersion = '2.38.1'
     interceptorVersion = '4.9.0'
     retrofitVersion = '2.9.0'
-    room_version = "2.4.1"
+    roomVersion = "2.4.1"
 }
