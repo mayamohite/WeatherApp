@@ -1,7 +1,7 @@
 package com.example.weatherapp.di
 
 import com.example.weatherapp.BuildConfig
-import com.example.weatherapp.data.remote.api.WeatherApi
+import com.example.weatherapp.data.api.WeatherApi
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
