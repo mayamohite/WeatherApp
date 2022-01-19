@@ -1,6 +1,6 @@
-package com.example.weatherapp.data.datasource.remote.service
+package com.example.weatherapp.data
 
-import com.example.weatherapp.data.datasource.remote.model.WeatherResponse
+import com.example.weatherapp.data.entities.WeatherResponse
 import retrofit2.http.GET
 import retrofit2.http.Path
 import retrofit2.http.Query
