@@ -12,14 +12,15 @@ import retrofit2.http.Query
 interface WeatherApi {
 
     @GET("forecast")
-   suspend fun getForecastByGeoCords(
+    suspend fun getForecastByGeoCords(
         @Query("lat") lat: Double,
         @Query("lon") lon: Double,
-        @Query("units") units: String
+        @Query("units") units: String,
+        @Query("cnt") noOfDays: Int = 5
     ): ForecastResponse
 
     @GET("weather")
-    suspend fun getCurrentByGeoCords(
+    suspend fun getCurrentWeatherByGeoCords(
         @Query("lat") lat: Double,
         @Query("lon") lon: Double,
         @Query("units") units: String

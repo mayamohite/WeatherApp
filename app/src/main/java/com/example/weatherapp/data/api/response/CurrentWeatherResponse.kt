@@ -8,17 +8,17 @@ data class CurrentWeatherResponse(
     val main: Main? = null,
     val sys: Sys? = null,
     @SerializedName("dt")
-    val datetime: Int? = null,
+    val date: Int? = null,
     val base: String? = null,
     val id: Int? = null,
     val cod: Int? = null,
     val name: String? = null,
     @SerializedName("coord")
-    val coordinates: Coord? = null,
+    val coordinates: Coordinates? = null,
     val wind: Wind? = null
 )
 
-data class Coord(
+data class Coordinates(
     @SerializedName("lon")
     val longitude: Double?,
     @SerializedName("lat")
@@ -34,7 +34,9 @@ data class Wind(
 
 data class Sys(
     val country: String? = null,
+    @SerializedName("sunrise")
     val sunriseTime: Long? = null,
+    @SerializedName("sunset")
     val sunsetTime: Long? = null,
 )
 

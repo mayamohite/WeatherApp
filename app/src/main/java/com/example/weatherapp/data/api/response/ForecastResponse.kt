@@ -1,21 +1,34 @@
 package com.example.weatherapp.data.api.response
 
-//@Parcelize
-data class ForecastResponse(
-    val name: String
+import com.google.gson.annotations.SerializedName
 
-//    @Json(name = "city")
-//    val city: City?,
-//
-//    @Json(name = "cnt")
-//    val cnt: Int?,
-//
-//    @Json(name = "cod")
-//    val cod: String?,
-//
-//    @Json(name = "message")
-//    val message: Double?,
-//
-//    @Json(name = "list")
-//    val list: List<ListItem>?
-) //: Parcelable
+data class ForecastResponse(
+    val name: String,
+    val city: City?,
+    @SerializedName("list")
+    val list: List<ForecastDetails>?
+)
+
+data class ForecastDetails(
+    @SerializedName("dt")
+    val date: Long? = null,
+    val main: Main? = null,
+    val visibility: Int? = null,
+    val wind: Wind? = null,
+    @SerializedName("dt_txt")
+    val dateAndTime: String? = null
+)
+
+data class City(
+    val id: Int? = null,
+    val name: String? = null,
+    @SerializedName("coord")
+    val coordinates: Coordinates,
+    @SerializedName("country")
+    val countryName: String? = null,
+    val timezone: Long? = null,
+    @SerializedName("sunrise")
+    val sunriseTime: Long? = null,
+    @SerializedName("sunset")
+    val sunsetTime: Long? = null,
+)
