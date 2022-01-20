@@ -3,7 +3,6 @@ package com.example.weatherapp.data.api.response
 import com.google.gson.annotations.SerializedName
 
 data class ForecastResponse(
-    val name: String,
     val city: City?,
     @SerializedName("list")
     val list: List<ForecastDetails>?

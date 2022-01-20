@@ -10,6 +10,7 @@ const val WEATHER_DATABASE = "weather_database"
 @Database(
     entities = [
         CurrentWeatherEntity::class,
+        WeatherForecastEntity::class,
     ], version = 1
 )
 @TypeConverters(DateConverter::class)
