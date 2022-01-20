@@ -1,29 +1,26 @@
 package com.example.weatherapp.data.entities
 
 import androidx.room.*
-import java.util.*
 
 /**
- * Place has 1:1 relation with current weather details.
+ * @see latitude and @see [longitude] are as composite primary keys.
  */
-@Entity(tableName = "current_weather")
+@Entity(
+    tableName = "CurrentWeather",
+    primaryKeys = ["latitude", "longitude"]
+)
 data class CurrentWeatherEntity(
-    @PrimaryKey
-    val date: Date,
-    val city: String,
-    val temperature: Float,
-    val humidity: Float,
-    val windSpeed: Float,
-    val pressure: Float,
-    val sunrise: String,
-    val sunset: String,
+    var visibility: Int?,
+    var timezone: Int?,
+    @Embedded
+    var main: MainEntity?,
+    var date: Long?,
+    @ColumnInfo(name = "city")
+    val name: String?,
+    val base: String?,
+    @Embedded
+    val wind: WindEntity?,
+    val latitude: Double,
+    val longitude: Double,
 )
 
-data class CurrentWeatherAndPlace(
-    @Embedded val placeDetails: PlaceEntity,
-    @Relation(
-        parentColumn = "placeName",
-        entityColumn = "city"
-    )
-    val currentWeather: CurrentWeatherEntity
-)
