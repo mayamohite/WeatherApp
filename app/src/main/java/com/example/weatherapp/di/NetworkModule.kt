@@ -1,6 +1,8 @@
 package com.example.weatherapp.di
 
 import com.example.weatherapp.BuildConfig
+import com.example.weatherapp.core.Constants
+import com.example.weatherapp.data.api.DefaultRequestInterceptor
 import com.example.weatherapp.data.api.WeatherApi
 import dagger.Module
 import dagger.Provides
@@ -25,10 +27,10 @@ class NetworkModule {
 
     @Singleton
     @Provides
-    fun provideRetrofit(okHttpClient: OkHttpClient, baseUrl: String): Retrofit {
+    fun provideRetrofit(okHttpClient: OkHttpClient): Retrofit {
         return Retrofit.Builder()
             .addConverterFactory(GsonConverterFactory.create())
-            .baseUrl(baseUrl)
+            .baseUrl(Constants.BASE_URL)
             .client(okHttpClient)
             .build()
     }
@@ -50,6 +52,7 @@ class NetworkModule {
         }
         return OkHttpClient.Builder()
             .addInterceptor(loggingInterceptor)
+            .addInterceptor(DefaultRequestInterceptor())
             .build()
     }
 }
