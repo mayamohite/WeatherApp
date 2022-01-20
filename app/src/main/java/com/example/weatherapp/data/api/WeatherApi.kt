@@ -16,13 +16,13 @@ interface WeatherApi {
         @Query("lat") lat: Double,
         @Query("lon") lon: Double,
         @Query("units") units: String,
-        @Query("cnt") noOfDays: Int = 5
+        @Query("cnt") noOfDays: Int = 5,
     ): ForecastResponse
 
     @GET("weather")
     suspend fun getCurrentWeatherByGeoCords(
         @Query("lat") lat: Double,
         @Query("lon") lon: Double,
-        @Query("units") units: String
+        @Query("units") units: String,
     ): CurrentWeatherResponse
 }
