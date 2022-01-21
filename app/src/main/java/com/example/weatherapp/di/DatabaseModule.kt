@@ -2,8 +2,10 @@ package com.example.weatherapp.di
 
 import android.content.Context
 import androidx.room.Room
-import com.example.weatherapp.data.db.WEATHER_DATABASE
-import com.example.weatherapp.data.db.WeatherDatabase
+import com.example.weatherapp.data.local.db.WEATHER_DATABASE
+import com.example.weatherapp.data.local.db.CurrentWeatherDao
+import com.example.weatherapp.data.local.db.WeatherDatabase
+import com.example.weatherapp.data.local.db.WeatherForecastDao
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -22,5 +24,15 @@ class DatabaseModule {
             applicationContext,
             WeatherDatabase::class.java, WEATHER_DATABASE
         ).build()
+    }
+
+    @Provides
+    fun provideCurrentWeatherDao(appDatabase: WeatherDatabase): CurrentWeatherDao {
+        return appDatabase.getWeatherDao()
+    }
+
+    @Provides
+    fun provideWeatherForecastDao(appDatabase: WeatherDatabase): WeatherForecastDao {
+        return appDatabase.getForecastDao()
     }
 }

@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">WeatherApp</string>
+    <string name="weather_details_not_available">Weather details are not available</string>
 </resources>

@@ -1,7 +1,9 @@
 package com.example.weatherapp.di
 
 import com.example.weatherapp.BuildConfig
-import com.example.weatherapp.data.api.WeatherApi
+import com.example.weatherapp.core.Constants
+import com.example.weatherapp.data.remote.DefaultRequestInterceptor
+import com.example.weatherapp.data.remote.WeatherApi
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -21,14 +23,14 @@ import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
-class NetworkModule {
+object NetworkModule {
 
     @Singleton
     @Provides
-    fun provideRetrofit(okHttpClient: OkHttpClient, baseUrl: String): Retrofit {
+    fun provideRetrofit(okHttpClient: OkHttpClient): Retrofit {
         return Retrofit.Builder()
             .addConverterFactory(GsonConverterFactory.create())
-            .baseUrl(baseUrl)
+            .baseUrl(Constants.BASE_URL)
             .client(okHttpClient)
             .build()
     }
@@ -50,6 +52,7 @@ class NetworkModule {
         }
         return OkHttpClient.Builder()
             .addInterceptor(loggingInterceptor)
+            .addInterceptor(DefaultRequestInterceptor())
             .build()
     }
 }
