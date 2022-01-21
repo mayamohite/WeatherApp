@@ -9,8 +9,8 @@ import com.example.weatherapp.data.entities.WeatherForecastEntity
 interface WeatherForecastDao {
 
     @Transaction
-    @Query("SELECT * FROM WeatherForecast Where cityName = :cityName")
-    suspend fun getDailyForecast(cityName: String): CityWithDailyForecast?
+    @Query("SELECT * FROM WeatherForecast Where latitude = :latitude AND longitude = :longitude")
+    suspend fun getDailyForecast(latitude: Double, longitude: Double): CityWithDailyForecast?
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun saveCityDetails(weatherForecastEntity: WeatherForecastEntity)

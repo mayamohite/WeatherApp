@@ -4,7 +4,9 @@ import androidx.room.Embedded
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
-@Entity(tableName = "DailyForecast")
+@Entity(
+    tableName = "DailyForecast",
+)
 data class DailyForecastEntity(
     @PrimaryKey
     val date: Long,

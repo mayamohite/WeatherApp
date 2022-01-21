@@ -1,8 +1,7 @@
 package com.example.weatherapp.data.db
 
-import androidx.room.Embedded
-import androidx.room.PrimaryKey
 import com.example.weatherapp.data.entities.*
+import java.util.*
 
 val MAIN_ENTITY = MainEntity(
     temp = 36.2,
@@ -58,7 +57,7 @@ val DAILY_WEATHER_FORECAST = listOf(
         cityKey = "Newtonhill",
     ),
     DailyForecastEntity(
-        date = 1642766400,
+        date = 1642934983,
         main = MAIN_ENTITY,
         visibility = 1000,
         wind = WIND_ENTITY,

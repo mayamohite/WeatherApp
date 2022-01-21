@@ -13,5 +13,6 @@ class CityWithDailyForecast {
         entityColumn = "cityKey",
         entity = DailyForecastEntity::class
     )
+
     var dailyForecast: List<DailyForecastEntity>? = null
 }

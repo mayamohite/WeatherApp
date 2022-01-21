@@ -40,7 +40,7 @@ class WeatherForecastDaoTest {
         database.getForecastDao().saveDailyForecast(CITY_DETAILS, DAILY_WEATHER_FORECAST)
 
         val weatherForecast: CityWithDailyForecast? =
-            database.getForecastDao().getDailyForecast("Newtonhill")
+            database.getForecastDao().getDailyForecast(57.0, -2.15)
         assert(weatherForecast != null)
         assert(weatherForecast!!.dailyForecast!!.size == 2)
         assert(weatherForecast!!.weatherForecastEntity == CITY_DETAILS)
@@ -54,7 +54,7 @@ class WeatherForecastDaoTest {
         database.getForecastDao().saveDailyForecast(CITY_DETAILS, DAILY_WEATHER_FORECAST)
 
         val weatherForecast: CityWithDailyForecast? =
-            database.getForecastDao().getDailyForecast("Newtonhill")
+            database.getForecastDao().getDailyForecast(57.0, -2.15)
         assert(weatherForecast != null)
         assert(weatherForecast!!.dailyForecast!!.size == 2)
         assert(weatherForecast!!.weatherForecastEntity == CITY_DETAILS)
