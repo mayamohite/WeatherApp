@@ -1,8 +1,8 @@
 package com.example.weatherapp.data.db
 
-import com.example.weatherapp.data.entities.CurrentWeatherEntity
-import com.example.weatherapp.data.entities.MainEntity
-import com.example.weatherapp.data.entities.WindEntity
+import androidx.room.Embedded
+import androidx.room.PrimaryKey
+import com.example.weatherapp.data.entities.*
 
 val MAIN_ENTITY = MainEntity(
     temp = 36.2,
@@ -37,5 +37,33 @@ val CURRENT_WEATHER_VARIATION = CurrentWeatherEntity(
     latitude = 57.0,
     longitude = -2.15,
     base = "base"
+)
+
+val CITY_DETAILS = WeatherForecastEntity(
+    cityName = "Newtonhill",
+    latitude = 57.0,
+    longitude = -2.15,
+    timezone = 0,
+    sunriseTime = 1642694983,
+    sunsetTime = 1642694893,
+)
+
+val DAILY_WEATHER_FORECAST = listOf(
+    DailyForecastEntity(
+        date = 1642234983,
+        main = MAIN_ENTITY,
+        visibility = 100,
+        wind = WIND_ENTITY,
+        dateAndTime = "2022-01-21 09:00:00",
+        cityKey = "Newtonhill",
+    ),
+    DailyForecastEntity(
+        date = 1642766400,
+        main = MAIN_ENTITY,
+        visibility = 1000,
+        wind = WIND_ENTITY,
+        dateAndTime = "2022-01-21 09:00:00",
+        cityKey = "Newtonhill",
+    )
 )
 

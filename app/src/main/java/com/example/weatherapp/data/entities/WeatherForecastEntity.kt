@@ -2,6 +2,7 @@ package com.example.weatherapp.data.entities
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import com.google.gson.annotations.SerializedName
 import java.util.*
 
 /**
@@ -10,14 +11,10 @@ import java.util.*
 @Entity(tableName = "WeatherForecast")
 data class WeatherForecastEntity(
     @PrimaryKey
-    val date: Date,
-    val maxTemperature: Float,
-    val minTemperature: Float,
-    val temperature: Float,
-    val humidity: Float,
-    val windSpeed: Float,
-    val pressure: Float,
-    val sunrise: String,
-    val sunset: String,
-    val cityId: String,
+    val cityName: String,
+    val longitude: Double?,
+    val latitude: Double?,
+    val timezone: Long?,
+    val sunriseTime: Long?,
+    val sunsetTime: Long?,
 )

@@ -55,5 +55,7 @@ class CurrentWeatherDaoTest {
     }
 
     @After
-    fun closeDb() = database.close()
+    fun closeDb() {
+        database.close()
+    }
 }
