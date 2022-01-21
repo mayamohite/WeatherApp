@@ -1,5 +1,6 @@
 package com.example.weatherapp.data.db
 
+import com.example.weatherapp.data.db.entities.*
 import com.example.weatherapp.data.entities.*
 import java.util.*
 

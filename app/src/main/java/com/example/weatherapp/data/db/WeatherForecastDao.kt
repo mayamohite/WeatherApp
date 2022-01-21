@@ -1,9 +1,9 @@
 package com.example.weatherapp.data.db
 
 import androidx.room.*
-import com.example.weatherapp.data.entities.CityWithDailyForecast
-import com.example.weatherapp.data.entities.DailyForecastEntity
-import com.example.weatherapp.data.entities.WeatherForecastEntity
+import com.example.weatherapp.data.db.entities.CityWithDailyForecast
+import com.example.weatherapp.data.db.entities.DailyForecastEntity
+import com.example.weatherapp.data.db.entities.WeatherForecastEntity
 
 @Dao
 interface WeatherForecastDao {

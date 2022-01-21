@@ -3,6 +3,10 @@ package com.example.weatherapp.data.db
 import androidx.room.Database
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
+import com.example.weatherapp.data.db.entities.CurrentWeatherEntity
+import com.example.weatherapp.data.db.entities.DailyForecastEntity
+import com.example.weatherapp.data.db.entities.DateConverter
+import com.example.weatherapp.data.db.entities.WeatherForecastEntity
 import com.example.weatherapp.data.entities.*
 
 const val WEATHER_DATABASE = "weather_database"
