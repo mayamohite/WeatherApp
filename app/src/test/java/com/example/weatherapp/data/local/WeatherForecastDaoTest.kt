@@ -44,9 +44,9 @@ class WeatherForecastDaoTest {
             database.getForecastDao().getDailyForecast(57.0, -2.15)
         assert(weatherForecast != null)
         assert(weatherForecast!!.dailyForecast!!.size == 2)
-        assert(weatherForecast!!.weatherForecastEntity == CITY_DETAILS)
-        assert(weatherForecast!!.dailyForecast?.get(0) == DAILY_WEATHER_FORECAST[0])
-        assert(weatherForecast!!.dailyForecast?.get(1) == DAILY_WEATHER_FORECAST[1])
+        assert(weatherForecast.weatherForecastEntity == CITY_DETAILS)
+        assert(weatherForecast.dailyForecast?.get(0) == DAILY_WEATHER_FORECAST[0])
+        assert(weatherForecast.dailyForecast?.get(1) == DAILY_WEATHER_FORECAST[1])
     }
 
     @Test
@@ -58,9 +58,9 @@ class WeatherForecastDaoTest {
             database.getForecastDao().getDailyForecast(57.0, -2.15)
         assert(weatherForecast != null)
         assert(weatherForecast!!.dailyForecast!!.size == 2)
-        assert(weatherForecast!!.weatherForecastEntity == CITY_DETAILS)
-        assert(weatherForecast!!.dailyForecast?.get(0) == DAILY_WEATHER_FORECAST[0])
-        assert(weatherForecast!!.dailyForecast?.get(1) == DAILY_WEATHER_FORECAST[1])
+        assert(weatherForecast.weatherForecastEntity == CITY_DETAILS)
+        assert(weatherForecast.dailyForecast?.get(0) == DAILY_WEATHER_FORECAST[0])
+        assert(weatherForecast.dailyForecast?.get(1) == DAILY_WEATHER_FORECAST[1])
     }
 
     @After
