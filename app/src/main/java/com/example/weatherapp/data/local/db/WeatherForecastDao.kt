@@ -1,9 +1,9 @@
-package com.example.weatherapp.data.db
+package com.example.weatherapp.data.local.db
 
 import androidx.room.*
-import com.example.weatherapp.data.db.entities.CityWithDailyForecast
-import com.example.weatherapp.data.db.entities.DailyForecastEntity
-import com.example.weatherapp.data.db.entities.WeatherForecastEntity
+import com.example.weatherapp.data.local.db.entities.CityWithDailyForecast
+import com.example.weatherapp.data.local.db.entities.DailyForecastEntity
+import com.example.weatherapp.data.local.db.entities.WeatherForecastEntity
 
 @Dao
 interface WeatherForecastDao {
@@ -13,17 +13,19 @@ interface WeatherForecastDao {
     suspend fun getDailyForecast(latitude: Double, longitude: Double): CityWithDailyForecast?
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun saveCityDetails(weatherForecastEntity: WeatherForecastEntity)
+    suspend fun saveCityDetails(weatherForecastEntity: WeatherForecastEntity)
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun saveDailyForecastDetails(dailyForecastEntity: List<DailyForecastEntity>)
+    suspend fun saveDailyForecastDetails(dailyForecastEntity: List<DailyForecastEntity>)
 
     @Transaction
     suspend fun saveDailyForecast(
         weatherForecastEntity: WeatherForecastEntity,
-        dailyForecastEntity: List<DailyForecastEntity>
+        dailyForecastEntity: List<DailyForecastEntity>?
     ) {
         saveCityDetails(weatherForecastEntity)
-        saveDailyForecastDetails(dailyForecastEntity)
+        dailyForecastEntity?.let {
+            saveDailyForecastDetails(dailyForecastEntity)
+        }
     }
 }

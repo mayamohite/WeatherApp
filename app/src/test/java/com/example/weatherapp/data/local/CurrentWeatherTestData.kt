@@ -1,8 +1,6 @@
-package com.example.weatherapp.data.db
+package com.example.weatherapp.data.local
 
-import com.example.weatherapp.data.db.entities.*
-import com.example.weatherapp.data.entities.*
-import java.util.*
+import com.example.weatherapp.data.local.db.entities.*
 
 val MAIN_ENTITY = MainEntity(
     temp = 36.2,
@@ -24,7 +22,9 @@ val CURRENT_WEATHER = CurrentWeatherEntity(
     wind = WIND_ENTITY,
     latitude = 57.0,
     longitude = -2.15,
-    base = ""
+    base = "",
+    sunrise = 1642694983,
+    sunset = 1642694893,
 )
 
 val CURRENT_WEATHER_VARIATION = CurrentWeatherEntity(
@@ -36,7 +36,9 @@ val CURRENT_WEATHER_VARIATION = CurrentWeatherEntity(
     wind = WIND_ENTITY,
     latitude = 57.0,
     longitude = -2.15,
-    base = "base"
+    base = "base",
+    sunrise = 1642694983,
+    sunset = 1642694893,
 )
 
 val CITY_DETAILS = WeatherForecastEntity(

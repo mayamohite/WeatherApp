@@ -2,8 +2,8 @@ package com.example.weatherapp.di
 
 import com.example.weatherapp.BuildConfig
 import com.example.weatherapp.core.Constants
-import com.example.weatherapp.data.api.DefaultRequestInterceptor
-import com.example.weatherapp.data.api.WeatherApi
+import com.example.weatherapp.data.remote.DefaultRequestInterceptor
+import com.example.weatherapp.data.remote.WeatherApi
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

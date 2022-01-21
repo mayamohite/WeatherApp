@@ -1,4 +1,4 @@
-package com.example.weatherapp.data.api
+package com.example.weatherapp.data.remote
 
 import com.example.weatherapp.core.Constants
 import okhttp3.Interceptor

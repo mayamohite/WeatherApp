@@ -1,4 +1,4 @@
-package com.example.weatherapp.data.api.response
+package com.example.weatherapp.data.remote.response
 
 import com.google.gson.annotations.SerializedName
 
@@ -8,7 +8,7 @@ data class CurrentWeatherResponse(
     val main: Main? = null,
     val sys: Sys? = null,
     @SerializedName("dt")
-    val date: Int? = null,
+    val date: Long? = null,
     val base: String? = null,
     val id: Int? = null,
     val cod: Int? = null,

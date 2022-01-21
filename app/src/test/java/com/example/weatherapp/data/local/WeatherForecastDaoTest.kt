@@ -1,11 +1,12 @@
-package com.example.weatherapp.data.db
+package com.example.weatherapp.data.local
 
 import android.os.Build
 import androidx.room.Room
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.example.weatherapp.MainCoroutineRule
-import com.example.weatherapp.data.db.entities.CityWithDailyForecast
+import com.example.weatherapp.data.local.db.WeatherDatabase
+import com.example.weatherapp.data.local.db.entities.CityWithDailyForecast
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.runBlocking
 import org.junit.After

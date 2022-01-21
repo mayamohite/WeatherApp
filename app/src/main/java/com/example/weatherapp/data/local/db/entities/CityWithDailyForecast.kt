@@ -1,4 +1,4 @@
-package com.example.weatherapp.data.db.entities
+package com.example.weatherapp.data.local.db.entities
 
 import androidx.room.Embedded
 import androidx.room.Relation
