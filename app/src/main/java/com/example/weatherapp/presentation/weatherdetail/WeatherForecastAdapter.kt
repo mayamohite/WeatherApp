@@ -40,7 +40,7 @@ class WeatherForecastAdapter @Inject constructor(
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val tvMaxTemp: TextView = itemView.findViewById(R.id.tv_max_temp)
-        val tvMinTemp: TextView = itemView.findViewById(R.id.tv_min_temp)
+        val tvMinTemp: TextView = itemView.findViewById(R.id.tv_humidity)
         val tvDay: TextView = itemView.findViewById(R.id.tv_day)
     }
 }

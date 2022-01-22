@@ -5,4 +5,6 @@
     <string name="pressure">Pressure</string>
     <string name="humidity">Humidity</string>
     <string name="wind">Wind</string>
+    <string name="celsius_unit">°C</string>
+    <string name="weather_not_available">Weather details not available.</string>
 </resources>

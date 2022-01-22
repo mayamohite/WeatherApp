@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.constraintlayout.widget.Group
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.DividerItemDecoration
@@ -40,6 +41,15 @@ class WeatherDetailsFragment : Fragment() {
     }
     private val tvCityName by lazy {
         fragmentView.findViewById<TextView>(R.id.tv_city)
+    }
+    private val gpCurrentWeather by lazy {
+        fragmentView.findViewById<Group>(R.id.current_weather_details)
+    }
+    private val tvCurrentWeatherError by lazy {
+        fragmentView.findViewById<TextView>(R.id.tv_current_weather_error)
+    }
+    private val tvWeatherForecastError by lazy {
+        fragmentView.findViewById<TextView>(R.id.tv_forecast_error)
     }
 
     companion object {
@@ -83,7 +93,7 @@ class WeatherDetailsFragment : Fragment() {
                 hideLoading = ::hideLoading,
                 showLoading = ::showLoading,
                 onSuccess = ::updateCurrentWeather,
-                onError = ::showErrorMessage
+                onError = ::showCurrentWeatherErrorMessage
             )
         )
         weatherDetailsViewModel.forecastWeatherLiveData.observe(
@@ -92,7 +102,7 @@ class WeatherDetailsFragment : Fragment() {
                 hideLoading = ::hideLoading,
                 showLoading = ::showLoading,
                 onSuccess = ::updateWeatherForecast,
-                onError = ::showErrorMessage
+                onError = ::showWeatherForecastErrorMessage
             )
         )
     }
@@ -106,6 +116,7 @@ class WeatherDetailsFragment : Fragment() {
     }
 
     private fun updateCurrentWeather(currentWeather: CurrentWeather) {
+        gpCurrentWeather.visibility = View.VISIBLE
         tvPressure.text = currentWeather.pressure
         tvHumidity.text = currentWeather.humidity
         tvWindSpeed.text = currentWeather.windSpeed
@@ -117,7 +128,11 @@ class WeatherDetailsFragment : Fragment() {
         weatherForecastAdapter.setWeatherList(weatherForecastDetails)
     }
 
-    private fun showErrorMessage(error: String) {
+    private fun showCurrentWeatherErrorMessage(error: String) {
+        tvCurrentWeatherError.visibility = View.VISIBLE
+    }
 
+    private fun showWeatherForecastErrorMessage(error: String) {
+        tvWeatherForecastError.visibility = View.VISIBLE
     }
 }
