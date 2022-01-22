@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.constraintlayout.widget.Group
 import androidx.fragment.app.Fragment
@@ -23,6 +24,7 @@ class WeatherDetailsFragment : Fragment() {
 
     private lateinit var fragmentView: View
     private val weatherDetailsViewModel: WeatherDetailsViewModel by activityViewModels()
+    private lateinit var progressBar: ProgressBar
 
     @Inject
     lateinit var weatherForecastAdapter: WeatherForecastAdapter
@@ -83,6 +85,7 @@ class WeatherDetailsFragment : Fragment() {
                 DividerItemDecoration.VERTICAL
             )
         )
+        progressBar = fragmentView.findViewById(R.id.progress_bar)
     }
 
     private fun observeDataChanges() {
@@ -108,11 +111,11 @@ class WeatherDetailsFragment : Fragment() {
     }
 
     private fun hideLoading() {
-
+        progressBar.visibility = View.INVISIBLE
     }
 
     private fun showLoading() {
-
+        progressBar.visibility = View.VISIBLE
     }
 
     private fun updateCurrentWeather(currentWeather: CurrentWeather) {
@@ -130,9 +133,11 @@ class WeatherDetailsFragment : Fragment() {
 
     private fun showCurrentWeatherErrorMessage(error: String) {
         tvCurrentWeatherError.visibility = View.VISIBLE
+        tvCurrentWeatherError.text = error
     }
 
     private fun showWeatherForecastErrorMessage(error: String) {
         tvWeatherForecastError.visibility = View.VISIBLE
+        tvWeatherForecastError.text = error
     }
 }
