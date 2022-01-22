@@ -33,7 +33,7 @@ class LocalDataSource @Inject constructor(
     }
 
     suspend fun saveWeatherForecast(
-        weatherForecastEntity: WeatherForecastEntity,
+        weatherForecastEntity: WeatherForecastEntity?,
         dailyForecastEntity: List<DailyForecastEntity>?
     ) {
         weatherForecastDao.saveDailyForecast(weatherForecastEntity, dailyForecastEntity)

@@ -23,14 +23,12 @@ class WeatherRepositoryImpl @Inject constructor(
         longitude: Double,
         metric: String
     ): Result<CurrentWeather> {
-        return try {
-            val response = remoteDataSource.getCurrentWeather(latitude, longitude, metric)
-            val weatherEntity = CurrentWeatherEntity(latitude, longitude, response)
+        val weatherEntity: CurrentWeatherEntity? =
+            remoteDataSource.getCurrentWeather(latitude, longitude, metric)
+        if (weatherEntity != null) {
             localDataSource.saveCurrentWeather(weatherEntity)
-            getWeatherDetailsFromDb(latitude, longitude)
-        } catch (exception: Exception) {
-            getWeatherDetailsFromDb(latitude, longitude)
         }
+        return getWeatherDetailsFromDb(latitude, longitude)
     }
 
     override suspend fun getWeatherForecast(
@@ -38,15 +36,15 @@ class WeatherRepositoryImpl @Inject constructor(
         longitude: Double,
         metric: String
     ): Result<List<ForecastWeather>> {
-        return try {
-            val response = remoteDataSource.getWeatherForecast(latitude, longitude, metric)
-            val weatherForecastEntity = WeatherForecastEntity(latitude, longitude, response)
-            val dailyForecastEntity = DailyForecastEntity.mapToDailyForecastEntity(response)
-            localDataSource.saveWeatherForecast(weatherForecastEntity, dailyForecastEntity)
-            getWeatherForecastFromDb(latitude, longitude)
-        } catch (exception: Exception) {
-            getWeatherForecastFromDb(latitude, longitude)
+        val response: CityWithDailyForecast? =
+            remoteDataSource.getWeatherForecast(latitude, longitude, metric)
+        if (response != null) {
+            localDataSource.saveWeatherForecast(
+                response.weatherForecastEntity,
+                response.dailyForecast
+            )
         }
+        return getWeatherForecastFromDb(latitude, longitude)
     }
 
     private suspend fun getWeatherDetailsFromDb(

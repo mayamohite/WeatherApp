@@ -20,10 +20,12 @@ interface WeatherForecastDao {
 
     @Transaction
     suspend fun saveDailyForecast(
-        weatherForecastEntity: WeatherForecastEntity,
+        weatherForecastEntity: WeatherForecastEntity?,
         dailyForecastEntity: List<DailyForecastEntity>?
     ) {
-        saveCityDetails(weatherForecastEntity)
+        weatherForecastEntity?.let {
+            saveCityDetails(weatherForecastEntity)
+        }
         dailyForecastEntity?.let {
             saveDailyForecastDetails(dailyForecastEntity)
         }
