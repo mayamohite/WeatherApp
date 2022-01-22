@@ -2,6 +2,7 @@ package com.example.weatherapp.data.local
 
 import com.example.weatherapp.data.local.db.entities.*
 import com.example.weatherapp.domain.model.CurrentWeather
+import com.example.weatherapp.domain.model.ForecastWeather
 
 const val NO_DATA_SYMBOL = " - "
 
@@ -104,5 +105,28 @@ val CURRENT_WEATHER_UI_EMPTY_DATA = CurrentWeather(
     windSpeed = NO_DATA_SYMBOL,
     temperatureInCelsius = NO_DATA_SYMBOL,
     temperatureInFahrenheit = NO_DATA_SYMBOL,
+)
+
+val WEATHER_FORECAST = listOf(
+    ForecastWeather(
+        day = "Friday",
+        temp = "36.2°C",
+        tempInFahrenheit = "97.16°F",
+        minTemp = "19.8°C",
+        minTempInFahrenheit = "67.64°F",
+        maxTemp = "23.3°C",
+        maxTempInFahrenheit = "73.94°F",
+        time = "09:00"
+    ),
+    ForecastWeather(
+        day = "Saturday",
+        temp = "36.2°C",
+        tempInFahrenheit = "97.16°F",
+        minTemp = "19.8°C",
+        minTempInFahrenheit = "67.64°F",
+        maxTemp = "23.3°C",
+        maxTempInFahrenheit = "73.94°F",
+        time = "09:00"
+    )
 )
 
