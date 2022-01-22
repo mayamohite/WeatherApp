@@ -25,6 +25,23 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+    flavorDimensions "country", "environment"
+    productFlavors {
+        "in" {
+            dimension "country"
+            resConfigs "en"
+        }
+        mx {
+            dimension "country"
+            resConfigs "en", "es"
+        }
+        stage {
+            dimension "environment"
+        }
+        prod {
+            dimension "environment"
+        }
+    }
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
