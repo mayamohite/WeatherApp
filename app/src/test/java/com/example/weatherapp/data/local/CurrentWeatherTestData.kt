@@ -58,6 +58,7 @@ val DAILY_WEATHER_FORECAST = listOf(
         wind = WIND_ENTITY,
         dateAndTime = "2022-01-21 09:00:00",
         cityKey = "Newtonhill",
+        formattedDate = "2022-01-21"
     ),
     DailyForecastEntity(
         date = 1642934983,
@@ -66,6 +67,7 @@ val DAILY_WEATHER_FORECAST = listOf(
         wind = WIND_ENTITY,
         dateAndTime = "2022-01-21 09:00:00",
         cityKey = "Newtonhill",
+        formattedDate = "2022-01-22"
     )
 )
 

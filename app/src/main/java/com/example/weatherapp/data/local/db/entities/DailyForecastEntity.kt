@@ -10,7 +10,6 @@ import com.example.weatherapp.data.remote.response.ForecastResponse
     tableName = "DailyForecast",
 )
 data class DailyForecastEntity(
-    @PrimaryKey
     val date: Long,
     @Embedded
     val main: MainEntity?,
@@ -19,6 +18,8 @@ data class DailyForecastEntity(
     val wind: WindEntity?,
     val dateAndTime: String?,
     val cityKey: String,
+    @PrimaryKey
+    val formattedDate: String,
 ) {
     companion object {
         fun mapToDailyForecastEntity(
@@ -36,7 +37,8 @@ data class DailyForecastEntity(
                         visibility = it.visibility,
                         wind = WindEntity(it.wind),
                         dateAndTime = it.dateAndTime,
-                        cityKey = forecastResponse.city?.name ?: ""
+                        cityKey = forecastResponse.city?.name ?: "",
+                        formattedDate = it.dateAndTime?.substringBefore(" ") ?: ""
                     )
                 )
             }
