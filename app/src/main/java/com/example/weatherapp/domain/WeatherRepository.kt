@@ -6,10 +6,15 @@ import com.example.weatherapp.domain.model.ForecastWeather
 
 interface WeatherRepository {
 
-    suspend fun getCurrentWeather(latitude: Double, longitude: Double): Result<CurrentWeather>
+    suspend fun getCurrentWeather(
+        latitude: Double,
+        longitude: Double,
+        metric: String,
+    ): Result<CurrentWeather>
 
     suspend fun getWeatherForecast(
         latitude: Double,
-        longitude: Double
+        longitude: Double,
+        metric: String,
     ): Result<List<ForecastWeather>>
 }

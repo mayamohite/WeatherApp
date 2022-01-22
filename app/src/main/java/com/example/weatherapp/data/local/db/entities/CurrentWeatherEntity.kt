@@ -27,7 +27,7 @@ data class CurrentWeatherEntity(
     val sunset: Long?,
 ) {
     @Ignore
-    constructor(currentWeather: CurrentWeatherResponse) : this(
+    constructor(latitude: Double, longitude: Double, currentWeather: CurrentWeatherResponse) : this(
         visibility = currentWeather.visibility,
         timezone = currentWeather.timezone,
         main = MainEntity(currentWeather.main),
@@ -35,8 +35,8 @@ data class CurrentWeatherEntity(
         name = currentWeather.name,
         base = currentWeather.base,
         wind = WindEntity(currentWeather.wind?.speed),
-        latitude = currentWeather.coordinates?.latitude ?: 0.0,
-        longitude = currentWeather.coordinates?.longitude ?: 0.0,
+        latitude = latitude,// currentWeather.coordinates?.latitude ?: 0.0,
+        longitude = longitude,//currentWeather.coordinates?.longitude ?: 0.0,
         sunrise = currentWeather.sys?.sunriseTime,
         sunset = currentWeather.sys?.sunsetTime,
     )

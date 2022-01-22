@@ -1,11 +1,12 @@
 package com.example.weatherapp.data.local.db.mapper
 
 import com.example.weatherapp.data.local.db.entities.CityWithDailyForecast
+import com.example.weatherapp.data.local.db.utils.NO_DATA_SYMBOL
+import com.example.weatherapp.data.local.db.utils.celsiusToFahrenheit
+import com.example.weatherapp.data.local.db.utils.getDay
+import com.example.weatherapp.data.local.db.utils.getTime
 import com.example.weatherapp.domain.common.DataToDomainMapper
 import com.example.weatherapp.domain.model.ForecastWeather
-import java.text.DateFormat
-import java.text.SimpleDateFormat
-import java.util.*
 import javax.inject.Inject
 
 class WeatherForecastDataMapper @Inject constructor(
@@ -20,34 +21,16 @@ class WeatherForecastDataMapper @Inject constructor(
             weatherForecastDetails.add(
                 ForecastWeather(
                     day = getDay(it.formattedDate),
-                    temp = it.main?.temp?.toString() ?: " - ",
+                    temp = it.main?.temp?.toString() ?: NO_DATA_SYMBOL,
                     tempInFahrenheit = celsiusToFahrenheit(it.main?.temp),
-                    minTemp = it.main?.tempMin?.toString() ?: " - ",
+                    minTemp = it.main?.tempMin?.toString() ?: NO_DATA_SYMBOL,
                     minTempInFahrenheit = celsiusToFahrenheit(it.main?.tempMin),
-                    maxTemp = it.main?.tempMax?.toString() ?: " - ",
+                    maxTemp = it.main?.tempMax?.toString() ?: NO_DATA_SYMBOL,
                     maxTempInFahrenheit = celsiusToFahrenheit(it.main?.tempMax),
                     time = getTime(it.dateAndTime) ?: "",
                 )
             )
         }
         return weatherForecastDetails
-    }
-
-    private fun celsiusToFahrenheit(temperature: Double?): String {
-        return if (temperature == null) {
-            " - "
-        } else {
-            "%.2f".format(((temperature * 9 / 5) + 32))
-        }
-    }
-
-    private fun getDay(dateTime: String): String {
-        val dateFormat: DateFormat = SimpleDateFormat("yyyy-MM-dd")
-        val formattedDate: Date = dateFormat.parse(dateTime)
-        return SimpleDateFormat("EEEE").format(formattedDate)
-    }
-
-    private fun getTime(datetime: String?): String? {
-        return datetime?.substringAfter(" ")?.substringBeforeLast(":")
     }
 }

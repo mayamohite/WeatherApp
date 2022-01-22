@@ -79,6 +79,9 @@ dependencies {
     implementation "androidx.test:core:$coreVersion"
     testImplementation "org.robolectric:robolectric:$robolectricVersion"
 
+    //location
+    implementation "com.google.android.gms:play-services-location:17.0.0"
+
     //Espresso
     testImplementation "androidx.test.espresso:espresso-core:$espressoVersion"
     testImplementation "androidx.test.espresso:espresso-contrib:$espressoVersion"

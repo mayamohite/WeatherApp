@@ -19,10 +19,10 @@ data class WeatherForecastEntity(
     val sunsetTime: Long?,
 ) {
     @Ignore
-    constructor(forecastResponse: ForecastResponse) : this(
+    constructor(latitude: Double, longitude: Double, forecastResponse: ForecastResponse) : this(
         cityName = forecastResponse.city?.name ?: "",
-        longitude = forecastResponse.city?.coordinates?.longitude ?: 0.0,
-        latitude = forecastResponse.city?.coordinates?.latitude ?: 0.0,
+        longitude = longitude,//forecastResponse.city?.coordinates?.longitude ?: 0.0,
+        latitude = latitude,//forecastResponse.city?.coordinates?.latitude ?: 0.0,
         timezone = forecastResponse.city?.timezone,
         sunriseTime = forecastResponse.city?.sunriseTime,
         sunsetTime = forecastResponse.city?.sunsetTime,

@@ -3,9 +3,7 @@ package com.example.weatherapp.data
 import android.content.Context
 import com.example.weatherapp.R
 import com.example.weatherapp.data.local.LocalDataSource
-import com.example.weatherapp.data.local.db.entities.CurrentWeatherEntity
-import com.example.weatherapp.data.local.db.entities.DailyForecastEntity
-import com.example.weatherapp.data.local.db.entities.WeatherForecastEntity
+import com.example.weatherapp.data.local.db.entities.*
 import com.example.weatherapp.data.remote.RemoteDataSource
 import com.example.weatherapp.domain.WeatherRepository
 import com.example.weatherapp.domain.common.Result
@@ -22,11 +20,12 @@ class WeatherRepositoryImpl @Inject constructor(
 
     override suspend fun getCurrentWeather(
         latitude: Double,
-        longitude: Double
+        longitude: Double,
+        metric: String
     ): Result<CurrentWeather> {
         return try {
-            val response = remoteDataSource.getCurrentWeather(latitude, longitude)
-            val weatherEntity = CurrentWeatherEntity(response)
+            val response = remoteDataSource.getCurrentWeather(latitude, longitude, metric)
+            val weatherEntity = CurrentWeatherEntity(latitude, longitude, response)
             localDataSource.saveCurrentWeather(weatherEntity)
             getWeatherDetailsFromDb(latitude, longitude)
         } catch (exception: Exception) {
@@ -36,18 +35,18 @@ class WeatherRepositoryImpl @Inject constructor(
 
     override suspend fun getWeatherForecast(
         latitude: Double,
-        longitude: Double
+        longitude: Double,
+        metric: String
     ): Result<List<ForecastWeather>> {
         return try {
-            val response = remoteDataSource.getWeatherForecast(latitude, longitude)
-            val weatherForecastEntity = WeatherForecastEntity(response)
+            val response = remoteDataSource.getWeatherForecast(latitude, longitude, metric)
+            val weatherForecastEntity = WeatherForecastEntity(latitude, longitude, response)
             val dailyForecastEntity = DailyForecastEntity.mapToDailyForecastEntity(response)
             localDataSource.saveWeatherForecast(weatherForecastEntity, dailyForecastEntity)
             getWeatherForecastFromDb(latitude, longitude)
         } catch (exception: Exception) {
             getWeatherForecastFromDb(latitude, longitude)
         }
-
     }
 
     private suspend fun getWeatherDetailsFromDb(

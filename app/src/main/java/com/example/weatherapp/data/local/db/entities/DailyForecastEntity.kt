@@ -2,8 +2,8 @@ package com.example.weatherapp.data.local.db.entities
 
 import androidx.room.Embedded
 import androidx.room.Entity
-import androidx.room.Ignore
 import androidx.room.PrimaryKey
+import com.example.weatherapp.data.local.db.utils.getDateFromDateAndTime
 import com.example.weatherapp.data.remote.response.ForecastResponse
 
 @Entity(
@@ -38,7 +38,7 @@ data class DailyForecastEntity(
                         wind = WindEntity(it.wind),
                         dateAndTime = it.dateAndTime,
                         cityKey = forecastResponse.city?.name ?: "",
-                        formattedDate = it.dateAndTime?.substringBefore(" ") ?: ""
+                        formattedDate = getDateFromDateAndTime(it.dateAndTime)
                     )
                 )
             }
