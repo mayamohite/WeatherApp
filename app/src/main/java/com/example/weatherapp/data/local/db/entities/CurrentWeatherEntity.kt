@@ -35,8 +35,8 @@ data class CurrentWeatherEntity(
         name = currentWeather.name,
         base = currentWeather.base,
         wind = WindEntity(currentWeather.wind?.speed),
-        latitude = latitude,// currentWeather.coordinates?.latitude ?: 0.0,
-        longitude = longitude,//currentWeather.coordinates?.longitude ?: 0.0,
+        latitude = latitude,
+        longitude = longitude,
         sunrise = currentWeather.sys?.sunriseTime,
         sunset = currentWeather.sys?.sunsetTime,
     )

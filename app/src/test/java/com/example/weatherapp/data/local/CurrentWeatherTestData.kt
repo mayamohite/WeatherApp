@@ -1,6 +1,9 @@
 package com.example.weatherapp.data.local
 
 import com.example.weatherapp.data.local.db.entities.*
+import com.example.weatherapp.domain.model.CurrentWeather
+
+const val NO_DATA_SYMBOL = " - "
 
 val MAIN_ENTITY = MainEntity(
     temp = 36.2,
@@ -69,5 +72,37 @@ val DAILY_WEATHER_FORECAST = listOf(
         cityKey = "Newtonhill",
         formattedDate = "2022-01-22"
     )
+)
+
+val CURRENT_WEATHER_UI_DATA = CurrentWeather(
+    cityName = "Newtonhill",
+    humidity = "90%",
+    pressure = "400.8 mBar",
+    windSpeed = "100.9",
+    temperatureInCelsius = "36.2°C",
+    temperatureInFahrenheit = "97.16°F",
+)
+
+val CURRENT_WEATHER_EMPTY_DATA = CurrentWeatherEntity(
+    visibility = null,
+    timezone = null,
+    main = null,
+    date = null,
+    name = null,
+    wind = null,
+    latitude = 57.0,
+    longitude = -2.15,
+    base = null,
+    sunrise = null,
+    sunset = null,
+)
+
+val CURRENT_WEATHER_UI_EMPTY_DATA = CurrentWeather(
+    cityName = NO_DATA_SYMBOL,
+    humidity = NO_DATA_SYMBOL,
+    pressure = NO_DATA_SYMBOL,
+    windSpeed = NO_DATA_SYMBOL,
+    temperatureInCelsius = NO_DATA_SYMBOL,
+    temperatureInFahrenheit = NO_DATA_SYMBOL,
 )
 
