@@ -1,7 +1,7 @@
 package com.example.weatherapp.data.local.db.mapper
 
-import com.example.weatherapp.data.local.DAILY_WEATHER_FORECAST
-import com.example.weatherapp.data.local.WEATHER_FORECAST
+import com.example.weatherapp.data.local.utils.DAILY_WEATHER_FORECAST
+import com.example.weatherapp.data.local.utils.WEATHER_FORECAST
 import com.example.weatherapp.data.local.db.entities.CityWithDailyForecast
 import org.junit.Test
 

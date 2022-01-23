@@ -29,7 +29,7 @@ class RemoteDataSourceImpl @Inject constructor(
     ): CityWithDailyForecast? {
         return try {
             val response = weatherApi.getForecastByGeoCords(latitude, longitude, metric)
-            return CityWithDailyForecast().get(latitude, longitude, response)
+            CityWithDailyForecast().get(latitude, longitude, response)
         } catch (exception: Exception) {
             null
         }

@@ -7,6 +7,10 @@ import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.example.weatherapp.MainCoroutineRule
 import com.example.weatherapp.data.local.*
 import com.example.weatherapp.data.local.db.entities.CityWithDailyForecast
+import com.example.weatherapp.data.local.utils.CURRENT_WEATHER
+import com.example.weatherapp.data.local.utils.CURRENT_WEATHER_UI_DATA
+import com.example.weatherapp.data.local.utils.DAILY_WEATHER_FORECAST
+import com.example.weatherapp.data.local.utils.WEATHER_FORECAST
 import com.example.weatherapp.data.remote.RemoteDataSourceImpl
 import com.example.weatherapp.domain.WeatherRepository
 import com.example.weatherapp.domain.common.Result

@@ -1,4 +1,4 @@
-package com.example.weatherapp.data.local
+package com.example.weatherapp.data.local.utils
 
 import com.example.weatherapp.data.local.db.entities.*
 import com.example.weatherapp.domain.model.CurrentWeather
