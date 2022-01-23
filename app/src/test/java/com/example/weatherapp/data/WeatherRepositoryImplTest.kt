@@ -7,7 +7,7 @@ import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.example.weatherapp.MainCoroutineRule
 import com.example.weatherapp.data.local.*
 import com.example.weatherapp.data.local.db.entities.CityWithDailyForecast
-import com.example.weatherapp.data.remote.RemoteDataSource
+import com.example.weatherapp.data.remote.RemoteDataSourceImpl
 import com.example.weatherapp.domain.WeatherRepository
 import com.example.weatherapp.domain.common.Result
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -29,22 +29,22 @@ class WeatherRepositoryImplTest {
     @get:Rule
     var mainCoroutineRule = MainCoroutineRule()
 
-    private val remoteDataSource: RemoteDataSource = mock()
+    private val remoteDataSourceImpl: RemoteDataSourceImpl = mock()
 
-    private val localDataSource: LocalDataSource = mock()
+    private val localDataSourceImpl: LocalDataSourceImpl = mock()
 
     lateinit var weatherRepository: WeatherRepository
     private val context = ApplicationProvider.getApplicationContext<Context>()
 
     @Before
     fun setUp() {
-        weatherRepository = WeatherRepositoryImpl(remoteDataSource, localDataSource, context)
+        weatherRepository = WeatherRepositoryImpl(remoteDataSourceImpl, localDataSourceImpl, context)
     }
 
     @Test
     fun `test get current weather returns error on success result`() = runBlocking {
-        whenever(remoteDataSource.getCurrentWeather(any(), any(), any())).thenReturn(null)
-        whenever(localDataSource.getCurrentWeather(any(), any())).thenReturn(null)
+        whenever(remoteDataSourceImpl.getCurrentWeather(any(), any(), any())).thenReturn(null)
+        whenever(localDataSourceImpl.getCurrentWeather(any(), any())).thenReturn(null)
 
         val actualResult = weatherRepository.getCurrentWeather(any(), any(), any())
 
@@ -53,9 +53,9 @@ class WeatherRepositoryImplTest {
 
     @Test
     fun `test get current weather returns success when api returns success`() = runBlocking {
-        whenever(remoteDataSource.getCurrentWeather(any(), any(), any()))
+        whenever(remoteDataSourceImpl.getCurrentWeather(any(), any(), any()))
             .thenReturn(CURRENT_WEATHER)
-        whenever(localDataSource.getCurrentWeather(any(), any()))
+        whenever(localDataSourceImpl.getCurrentWeather(any(), any()))
             .thenReturn(CURRENT_WEATHER_UI_DATA)
 
         val actualResult = weatherRepository.getCurrentWeather(any(), any(), any())
@@ -65,8 +65,8 @@ class WeatherRepositoryImplTest {
 
     @Test
     fun `test get weather forecast returns error on success result`() = runBlocking {
-        whenever(remoteDataSource.getWeatherForecast(any(), any(), any())).thenReturn(null)
-        whenever(localDataSource.getWeatherForecast(any(), any())).thenReturn(null)
+        whenever(remoteDataSourceImpl.getWeatherForecast(any(), any(), any())).thenReturn(null)
+        whenever(localDataSourceImpl.getWeatherForecast(any(), any())).thenReturn(null)
 
         val actualResult = weatherRepository.getCurrentWeather(any(), any(), any())
 
@@ -75,9 +75,9 @@ class WeatherRepositoryImplTest {
 
     @Test
     fun `test get weather forecast returns error when api returns empty response`() = runBlocking {
-        whenever(remoteDataSource.getWeatherForecast(any(), any(), any()))
+        whenever(remoteDataSourceImpl.getWeatherForecast(any(), any(), any()))
             .thenReturn(CityWithDailyForecast())
-        whenever(localDataSource.getWeatherForecast(any(), any()))
+        whenever(localDataSourceImpl.getWeatherForecast(any(), any()))
             .thenReturn(emptyList())
 
         val actualResult = weatherRepository.getWeatherForecast(any(), any(), any())
@@ -91,9 +91,9 @@ class WeatherRepositoryImplTest {
             val cityWithDailyForecastModel = CityWithDailyForecast()
             cityWithDailyForecastModel.dailyForecast = DAILY_WEATHER_FORECAST
 
-            whenever(remoteDataSource.getWeatherForecast(any(), any(), any()))
+            whenever(remoteDataSourceImpl.getWeatherForecast(any(), any(), any()))
                 .thenReturn(cityWithDailyForecastModel)
-            whenever(localDataSource.getWeatherForecast(any(), any()))
+            whenever(localDataSourceImpl.getWeatherForecast(any(), any()))
                 .thenReturn(WEATHER_FORECAST)
 
             val actualResult = weatherRepository.getWeatherForecast(any(), any(), any())

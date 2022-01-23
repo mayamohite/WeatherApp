@@ -4,13 +4,15 @@ import com.example.weatherapp.data.local.db.entities.CityWithDailyForecast
 import com.example.weatherapp.data.local.db.entities.CurrentWeatherEntity
 import com.example.weatherapp.data.local.db.entities.DailyForecastEntity
 import com.example.weatherapp.data.local.db.entities.WeatherForecastEntity
+import com.example.weatherapp.domain.WeatherRemoteDataSource
 import java.lang.Exception
 import javax.inject.Inject
 
-class RemoteDataSource @Inject constructor(
+class RemoteDataSourceImpl @Inject constructor(
     private val weatherApi: WeatherApi,
-) {
-    suspend fun getCurrentWeather(
+) : WeatherRemoteDataSource {
+
+    override suspend fun getCurrentWeather(
         latitude: Double,
         longitude: Double,
         metric: String
@@ -23,7 +25,7 @@ class RemoteDataSource @Inject constructor(
         }
     }
 
-    suspend fun getWeatherForecast(
+    override suspend fun getWeatherForecast(
         latitude: Double,
         longitude: Double,
         metric: String

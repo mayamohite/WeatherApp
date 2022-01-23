@@ -2,9 +2,9 @@ package com.example.weatherapp.data
 
 import android.content.Context
 import com.example.weatherapp.R
-import com.example.weatherapp.data.local.LocalDataSource
 import com.example.weatherapp.data.local.db.entities.*
-import com.example.weatherapp.data.remote.RemoteDataSource
+import com.example.weatherapp.domain.WeatherLocalDataSource
+import com.example.weatherapp.domain.WeatherRemoteDataSource
 import com.example.weatherapp.domain.WeatherRepository
 import com.example.weatherapp.domain.common.Result
 import com.example.weatherapp.domain.model.CurrentWeather
@@ -13,8 +13,8 @@ import dagger.hilt.android.qualifiers.ApplicationContext
 import javax.inject.Inject
 
 class WeatherRepositoryImpl @Inject constructor(
-    private val remoteDataSource: RemoteDataSource,
-    private val localDataSource: LocalDataSource,
+    private val remoteDataSource: WeatherRemoteDataSource,
+    private val localDataSource: WeatherLocalDataSource,
     @ApplicationContext private val context: Context,
 ) : WeatherRepository {
 

@@ -8,7 +8,7 @@ import javax.inject.Inject
 
 class GetCurrentWeatherUseCase @Inject constructor(
     private val weatherRepository: WeatherRepository,
-) {
+) : BaseUseCase() {
 
     suspend fun getCurrentWeather(latitude: Double, longitude: Double): Result<CurrentWeather> {
         return weatherRepository.getCurrentWeather(latitude, longitude, Constants.METRIC)
