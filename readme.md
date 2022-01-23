@@ -12,7 +12,7 @@ WeatherApp is a sample Android application that uses the clean MVVM architecture
 #### The app has following packages:
 1. `data`: It contains all the data accessing classes.
 2. `di`: Dependency providing classes using HILT.
-3. `presentation`: Activity and fragment classes to show product list and product details along with their corresponding ViewModel.
+3. `presentation`: Activity and fragment classes to show weather details along with their corresponding ViewModel.
 4. `domain`: Domain has single responsibility usecases and interfaces of data layer.
 
 #### Testing
@@ -25,18 +25,18 @@ Written unit test cases for mappers, repository and database.
 
 | Requirement                  | Status |   
 | :--------------------------: | :----: | 
-| Kotlin Used                  |  Done  |
-| DI                           |  Done  |
-| Unit test cases              |  Done  |
-| Data caching                 |  Done  |
-| Build variants               |  Done  |
-| Multi modular architecture   |  No    |
-| Display weather data         |  Done  |
-| List of weather data         |  Done  |
-| Search another city          |  No    |
-| Add city to favourite list   |  No    |
-| View favourite city list     |  No    |
-| Change °C to °F              |  No    |
-| Import/Export csv file       |  No    |
-| Weather notification at 6 AM |  No    |
-| View list of favourite cities|  No    |
+| Kotlin Used                  |  [x]   |
+| DI                           |  [x]   |
+| Unit test cases              |  [x]   |
+| Data caching                 |  [x]   |
+| Build variants               |  [x]   |
+| Multi modular architecture   |  [ ]   |
+| Display weather data         |  [x]   |
+| List of weather data         |  [x]   |
+| Search another city          |  [ ]   |
+| Add city to favourite list   |  [ ]   |
+| View favourite city list     |  [ ]   |
+| Change °C to °F              |  [ ]   |
+| Import/Export csv file       |  [ ]   |
+| Weather notification at 6 AM |  [ ]   |
+| View list of favourite cities|  [ ]   |
