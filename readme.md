@@ -22,21 +22,20 @@ Written unit test cases for mappers, repository and database.
 - ViewModel test cases are not written.
 - UI test cases are not written.
 
-
 | Requirement                  | Status |   
 | :--------------------------: | :----: | 
-| Kotlin Used                  | - [x]  |
-| DI                           | - [x]  |
-| Unit test cases              | - [x]  |
-| Data caching                 | - [x]  |
-| Build variants               | - [x]  |
-| Multi modular architecture   | - [ ]  |
-| Display weather data         | - [x]  |
-| List of weather data         | - [x]  |
-| Search another city          | - [ ]  |
-| Add city to favourite list   | - [ ]  |
-| View favourite city list     | - [ ]  |
-| Change °C to °F              | - [ ]  |
-| Import/Export csv file       | - [ ]  |
-| Weather notification at 6 AM | - [ ]  |
-| View list of favourite cities| - [ ]  |
+| Kotlin Used                  | &check;|
+| DI                           | &check;|
+| Unit test cases              | &check;|
+| Data caching                 | &check;|
+| Build variants               | &check;|
+| Multi modular architecture   | &cross;| 
+| Display weather data         | &check;|
+| List of weather data         | &check;|
+| Search another city          | &cross;|  
+| Add city to favourite list   | &cross;|
+| View favourite city list     | &cross;|
+| Change °C to °F              | &cross;|
+| Import/Export csv file       | &cross;|
+| Weather notification at 6 AM | &cross;|
+| View list of favourite cities| &cross;|
