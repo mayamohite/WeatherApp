@@ -7,6 +7,8 @@ import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.example.weatherapp.MainCoroutineRule
 import com.example.weatherapp.data.local.db.WeatherDatabase
 import com.example.weatherapp.data.local.db.entities.CityWithDailyForecast
+import com.example.weatherapp.data.local.utils.CITY_DETAILS
+import com.example.weatherapp.data.local.utils.DAILY_WEATHER_FORECAST
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.runBlocking
 import org.junit.After

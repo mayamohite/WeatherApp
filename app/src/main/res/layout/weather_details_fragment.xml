@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ProgressBar
+        android:id="@+id/progress_bar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:indeterminateTint="@color/purple_200"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.constraintlayout.widget.Group
+        android:id="@+id/current_weather_details"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="invisible"
+        app:constraint_referenced_ids="tv_city,
+         tv_temperature, tv_wind, tv_wind_value,
+         tv_pressure, tv_pressure_value,
+         tv_humidity, tv_humidity_value" />
+
+    <TextView
+        android:id="@+id/tv_current_weather_error"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="@string/current_weather_not_available"
+        android:visibility="gone"
+        app:layout_constraintBottom_toTopOf="@+id/rv_weather_forecast"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_forecast_error"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="@string/weather_forecast_not_available"
+        android:visibility="gone"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/rv_weather_forecast" />
+
+    <TextView
+        android:id="@+id/tv_city"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/twenty_dp"
+        android:gravity="center_horizontal"
+        android:textSize="@dimen/twenty_sp"
+        android:textStyle="bold"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_temperature"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/twenty_dp"
+        android:gravity="center_horizontal"
+        android:textSize="@dimen/fifty_sp"
+        android:textStyle="bold"
+        app:layout_constraintTop_toBottomOf="@+id/tv_city" />
+
+    <TextView
+        android:id="@+id/tv_pressure"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/sixteen_dp"
+        android:layout_marginTop="@dimen/twenty_dp"
+        android:gravity="center_horizontal"
+        android:text="@string/pressure"
+        android:textSize="@dimen/eighteen_sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toStartOf="@+id/tv_humidity"
+        app:layout_constraintHorizontal_chainStyle="spread_inside"
+        app:layout_constraintStart_toEndOf="@+id/tv_wind"
+        app:layout_constraintTop_toBottomOf="@+id/tv_temperature" />
+
+    <TextView
+        android:id="@+id/tv_pressure_value"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/ten_dp"
+        android:textSize="@dimen/sixteen_sp"
+        app:layout_constraintLeft_toLeftOf="@+id/tv_pressure"
+        app:layout_constraintRight_toRightOf="@+id/tv_pressure"
+        app:layout_constraintTop_toBottomOf="@+id/tv_pressure" />
+
+    <TextView
+        android:id="@+id/tv_humidity"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/sixteen_dp"
+        android:layout_marginTop="@dimen/twenty_dp"
+        android:layout_marginRight="16dp"
+        android:gravity="center_horizontal"
+        android:text="@string/humidity"
+        android:textSize="@dimen/eighteen_sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_chainStyle="spread_inside"
+        app:layout_constraintStart_toEndOf="@+id/tv_pressure"
+        app:layout_constraintTop_toBottomOf="@+id/tv_temperature" />
+
+    <TextView
+        android:id="@+id/tv_humidity_value"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/ten_dp"
+        android:textSize="@dimen/sixteen_sp"
+        app:layout_constraintLeft_toLeftOf="@+id/tv_humidity"
+        app:layout_constraintRight_toRightOf="@+id/tv_humidity"
+        app:layout_constraintTop_toBottomOf="@+id/tv_humidity" />
+
+    <TextView
+        android:id="@+id/tv_wind"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/sixteen_dp"
+        android:layout_marginTop="@dimen/twenty_dp"
+        android:gravity="center_horizontal"
+        android:text="@string/wind"
+        android:textSize="@dimen/eighteen_sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toStartOf="@+id/tv_pressure"
+        app:layout_constraintHorizontal_chainStyle="spread_inside"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_temperature" />
+
+    <TextView
+        android:id="@+id/tv_wind_value"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/ten_dp"
+        android:textSize="@dimen/sixteen_sp"
+        app:layout_constraintLeft_toLeftOf="@+id/tv_wind"
+        app:layout_constraintRight_toRightOf="@+id/tv_wind"
+        app:layout_constraintTop_toBottomOf="@+id/tv_wind" />
+
+    <TextView
+        android:id="@+id/tv_forecast"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/twenty_dp"
+        android:gravity="center_horizontal"
+        android:text="@string/weather_forecast"
+        android:textSize="@dimen/twenty_sp"
+        android:textStyle="bold"
+        app:layout_constraintTop_toBottomOf="@+id/tv_wind_value" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_weather_forecast"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintBaseline_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_forecast" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

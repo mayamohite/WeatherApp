@@ -1,6 +1,7 @@
 package com.example.weatherapp.data.local.db.mapper
 
 import com.example.weatherapp.data.local.db.entities.CurrentWeatherEntity
+import com.example.weatherapp.data.local.db.utils.*
 import com.example.weatherapp.domain.common.DataToDomainMapper
 import com.example.weatherapp.domain.model.CurrentWeather
 import javax.inject.Inject
@@ -13,23 +14,14 @@ class CurrentWeatherDataMapper @Inject constructor() :
             return null
         }
         return CurrentWeather(
-            cityName = input.name ?: " - ",
-            humidity = input.main?.humidity?.toString() ?: " - ",
-            pressure = input.main?.pressure?.toString() ?: " - ",
-            sunrise = "",
-            sunset = "",
-            temperatureInCelsius = input.main?.temp?.toString() ?: " - ",
+            cityName = input.name ?: NO_DATA_SYMBOL,
+            humidity = humidity(input.main?.humidity),
+            pressure = pressure(input.main?.pressure),
+            windSpeed = input.wind?.speed?.toString() ?: NO_DATA_SYMBOL,
+            temperatureInCelsius = temperatureInCelsius(input.main?.temp),
             temperatureInFahrenheit = celsiusToFahrenheit(
                 input.main?.temp
             ),
         )
-    }
-
-    private fun celsiusToFahrenheit(temperature: Double?): String {
-        return if (temperature == null) {
-            " - "
-        } else {
-            "%.2f".format(((temperature * 9 / 5) + 32))
-        }
     }
 }

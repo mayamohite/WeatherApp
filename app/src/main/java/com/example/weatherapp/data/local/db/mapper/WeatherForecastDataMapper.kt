@@ -1,10 +1,9 @@
 package com.example.weatherapp.data.local.db.mapper
 
 import com.example.weatherapp.data.local.db.entities.CityWithDailyForecast
+import com.example.weatherapp.data.local.db.utils.*
 import com.example.weatherapp.domain.common.DataToDomainMapper
 import com.example.weatherapp.domain.model.ForecastWeather
-import java.text.SimpleDateFormat
-import java.util.*
 import javax.inject.Inject
 
 class WeatherForecastDataMapper @Inject constructor(
@@ -18,36 +17,17 @@ class WeatherForecastDataMapper @Inject constructor(
         input.dailyForecast?.forEach {
             weatherForecastDetails.add(
                 ForecastWeather(
-                    day = getDay(it.date),
-                    temp = it.main?.temp?.toString() ?: " - ",
+                    day = getDay(it.formattedDate),
+                    temp = temperatureInCelsius(it.main?.temp),
                     tempInFahrenheit = celsiusToFahrenheit(it.main?.temp),
-                    minTemp = it.main?.tempMin?.toString() ?: " - ",
+                    minTemp = temperatureInCelsius(it.main?.tempMin),
                     minTempInFahrenheit = celsiusToFahrenheit(it.main?.tempMin),
-                    maxTemp = it.main?.tempMax?.toString() ?: " - ",
+                    maxTemp = temperatureInCelsius(it.main?.tempMax),
                     maxTempInFahrenheit = celsiusToFahrenheit(it.main?.tempMax),
-                    time = getTime(it.dateAndTime) ?: ""
+                    time = getTime(it.dateAndTime) ?: "",
                 )
             )
         }
         return weatherForecastDetails
-    }
-
-    private fun celsiusToFahrenheit(temperature: Double?): String {
-        return if (temperature == null) {
-            " - "
-        } else {
-            "%.2f".format(((temperature * 9 / 5) + 32))
-        }
-    }
-
-    private fun getDay(timestamp: Long): String {
-        val calendar = Calendar.getInstance(Locale.getDefault())
-        calendar.timeInMillis = timestamp * 1000
-        val simpleDateFormat = SimpleDateFormat("EEEE")
-        return simpleDateFormat.format(calendar.timeInMillis)
-    }
-
-    private fun getTime(datetime: String?): String? {
-        return datetime?.substringAfter(" ")?.substringBeforeLast(":")
     }
 }

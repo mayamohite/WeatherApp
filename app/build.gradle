@@ -25,6 +25,23 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+    flavorDimensions "country", "environment"
+    productFlavors {
+        "in" {
+            dimension "country"
+            resConfigs "en"
+        }
+        mx {
+            dimension "country"
+            resConfigs "en", "es"
+        }
+        stage {
+            dimension "environment"
+        }
+        prod {
+            dimension "environment"
+        }
+    }
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
@@ -78,6 +95,9 @@ dependencies {
     testImplementation "androidx.test:rules:$coreVersion"
     implementation "androidx.test:core:$coreVersion"
     testImplementation "org.robolectric:robolectric:$robolectricVersion"
+
+    //location
+    implementation "com.google.android.gms:play-services-location:17.0.0"
 
     //Espresso
     testImplementation "androidx.test.espresso:espresso-core:$espressoVersion"

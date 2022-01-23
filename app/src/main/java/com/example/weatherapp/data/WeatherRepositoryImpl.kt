@@ -2,11 +2,9 @@ package com.example.weatherapp.data
 
 import android.content.Context
 import com.example.weatherapp.R
-import com.example.weatherapp.data.local.LocalDataSource
-import com.example.weatherapp.data.local.db.entities.CurrentWeatherEntity
-import com.example.weatherapp.data.local.db.entities.DailyForecastEntity
-import com.example.weatherapp.data.local.db.entities.WeatherForecastEntity
-import com.example.weatherapp.data.remote.RemoteDataSource
+import com.example.weatherapp.data.local.db.entities.*
+import com.example.weatherapp.domain.WeatherLocalDataSource
+import com.example.weatherapp.domain.WeatherRemoteDataSource
 import com.example.weatherapp.domain.WeatherRepository
 import com.example.weatherapp.domain.common.Result
 import com.example.weatherapp.domain.model.CurrentWeather
@@ -15,39 +13,38 @@ import dagger.hilt.android.qualifiers.ApplicationContext
 import javax.inject.Inject
 
 class WeatherRepositoryImpl @Inject constructor(
-    private val remoteDataSource: RemoteDataSource,
-    private val localDataSource: LocalDataSource,
+    private val remoteDataSource: WeatherRemoteDataSource,
+    private val localDataSource: WeatherLocalDataSource,
     @ApplicationContext private val context: Context,
 ) : WeatherRepository {
 
     override suspend fun getCurrentWeather(
         latitude: Double,
-        longitude: Double
+        longitude: Double,
+        metric: String
     ): Result<CurrentWeather> {
-        return try {
-            val response = remoteDataSource.getCurrentWeather(latitude, longitude)
-            val weatherEntity = CurrentWeatherEntity(response)
+        val weatherEntity: CurrentWeatherEntity? =
+            remoteDataSource.getCurrentWeather(latitude, longitude, metric)
+        if (weatherEntity != null) {
             localDataSource.saveCurrentWeather(weatherEntity)
-            getWeatherDetailsFromDb(latitude, longitude)
-        } catch (exception: Exception) {
-            getWeatherDetailsFromDb(latitude, longitude)
         }
+        return getWeatherDetailsFromDb(latitude, longitude)
     }
 
     override suspend fun getWeatherForecast(
         latitude: Double,
-        longitude: Double
+        longitude: Double,
+        metric: String
     ): Result<List<ForecastWeather>> {
-        return try {
-            val response = remoteDataSource.getWeatherForecast(latitude, longitude)
-            val weatherForecastEntity = WeatherForecastEntity(response)
-            val dailyForecastEntity = DailyForecastEntity.mapToDailyForecastEntity(response)
-            localDataSource.saveWeatherForecast(weatherForecastEntity, dailyForecastEntity)
-            getWeatherForecastFromDb(latitude, longitude)
-        } catch (exception: Exception) {
-            getWeatherForecastFromDb(latitude, longitude)
+        val response: CityWithDailyForecast? =
+            remoteDataSource.getWeatherForecast(latitude, longitude, metric)
+        if (response != null) {
+            localDataSource.saveWeatherForecast(
+                response.weatherForecastEntity,
+                response.dailyForecast
+            )
         }
-
+        return getWeatherForecastFromDb(latitude, longitude)
     }
 
     private suspend fun getWeatherDetailsFromDb(
@@ -56,7 +53,7 @@ class WeatherRepositoryImpl @Inject constructor(
     ): Result<CurrentWeather> {
         val weatherDetails = localDataSource.getCurrentWeather(latitude, longitude)
         return if (weatherDetails == null) {
-            Result.Error(context.getString(R.string.weather_details_not_available))
+            Result.Error(context.getString(R.string.current_weather_not_available))
         } else {
             Result.Success(weatherDetails)
         }
@@ -68,7 +65,7 @@ class WeatherRepositoryImpl @Inject constructor(
     ): Result<List<ForecastWeather>> {
         val weatherDetails = localDataSource.getWeatherForecast(latitude, longitude)
         return if (weatherDetails == null || weatherDetails.isEmpty()) {
-            Result.Error(context.getString(R.string.weather_details_not_available))
+            Result.Error(context.getString(R.string.weather_forecast_not_available))
         } else {
             Result.Success(weatherDetails)
         }

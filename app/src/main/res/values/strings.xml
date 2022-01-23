@@ -1,4 +1,12 @@
 <resources>
     <string name="app_name">WeatherApp</string>
     <string name="weather_details_not_available">Weather details are not available</string>
+    <string name="weather_forecast">Weather Forecast</string>
+    <string name="pressure">Pressure</string>
+    <string name="humidity">Humidity</string>
+    <string name="wind">Wind</string>
+    <string name="celsius_unit">°C</string>
+    <string name="current_weather_not_available">Current weather details are not available.</string>
+    <string name="weather_forecast_not_available">Weather forecast details are not available.</string>
+    <string name="location_warning">Please turn on your location.</string>
 </resources>

@@ -6,6 +6,8 @@ import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.example.weatherapp.MainCoroutineRule
 import com.example.weatherapp.data.local.db.WeatherDatabase
+import com.example.weatherapp.data.local.utils.CURRENT_WEATHER
+import com.example.weatherapp.data.local.utils.CURRENT_WEATHER_VARIATION
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.runBlocking
 import org.junit.After
