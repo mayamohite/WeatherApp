@@ -177,7 +177,9 @@ class WeatherDetailsFragment : Fragment() {
         }
     }
 
-
+    /**
+     * Get users last location
+     */
     @SuppressLint("MissingPermission")
     private fun getLastLocation() {
         if (isLocationEnabled()) {
@@ -191,7 +193,6 @@ class WeatherDetailsFragment : Fragment() {
                             location.longitude
                         )
                     }
-
                     log(TAG, "${location?.latitude} ${location?.longitude}")
                 } else {
                     log(TAG, lastLocation.exception?.message ?: "")
@@ -204,6 +205,9 @@ class WeatherDetailsFragment : Fragment() {
         }
     }
 
+    /**
+     * Check location is enabled or not
+     */
     private fun isLocationEnabled(): Boolean {
         val locationManager =
             activity?.getSystemService(Context.LOCATION_SERVICE) as LocationManager

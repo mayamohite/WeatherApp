@@ -1,7 +1,8 @@
-package com.example.weatherapp
+package com.example.weatherapp.presentation
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.example.weatherapp.R
 import dagger.hilt.android.AndroidEntryPoint
 import com.example.weatherapp.presentation.weatherdetail.WeatherDetailsFragment
 
@@ -15,9 +16,8 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun launchWeatherDetailsFragment() {
-        val productListFragment = WeatherDetailsFragment.newInstance()
         supportFragmentManager.beginTransaction().replace(
-            R.id.fragment_container, productListFragment
+            R.id.fragment_container, WeatherDetailsFragment.newInstance()
         ).addToBackStack(WeatherDetailsFragment.TAG).commit()
     }
 
