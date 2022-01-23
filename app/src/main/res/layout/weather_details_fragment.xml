@@ -18,7 +18,7 @@
         android:id="@+id/current_weather_details"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:visibility="gone"
+        android:visibility="invisible"
         app:constraint_referenced_ids="tv_city,
          tv_temperature, tv_wind, tv_wind_value,
          tv_pressure, tv_pressure_value,
@@ -29,8 +29,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:text="@string/weather_not_available"
-        android:textSize="@dimen/eighteen_sp"
+        android:text="@string/current_weather_not_available"
         android:visibility="gone"
         app:layout_constraintBottom_toTopOf="@+id/rv_weather_forecast"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -42,7 +41,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:text="@string/weather_not_available"
+        android:text="@string/weather_forecast_not_available"
         android:visibility="gone"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"

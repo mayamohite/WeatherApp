@@ -1,11 +1,20 @@
 package com.example.weatherapp.presentation.weatherdetail
 
+import android.Manifest
+import android.annotation.SuppressLint
+import android.content.Context
+import android.content.Intent
+import android.content.pm.PackageManager
+import android.location.LocationManager
 import android.os.Bundle
+import android.provider.Settings
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ProgressBar
 import android.widget.TextView
+import android.widget.Toast
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.constraintlayout.widget.Group
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
@@ -16,8 +25,15 @@ import com.example.weatherapp.R
 import com.example.weatherapp.domain.model.CurrentWeather
 import com.example.weatherapp.domain.model.ForecastWeather
 import com.example.weatherapp.presentation.utils.ResultObserver
+import com.example.weatherapp.presentation.utils.log
+import com.example.weatherapp.presentation.utils.toast
+import com.google.android.gms.location.FusedLocationProviderClient
+import com.google.android.gms.location.LocationServices
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
+import androidx.core.content.ContextCompat
+import java.security.Permissions
+
 
 @AndroidEntryPoint
 class WeatherDetailsFragment : Fragment() {
@@ -25,6 +41,7 @@ class WeatherDetailsFragment : Fragment() {
     private lateinit var fragmentView: View
     private val weatherDetailsViewModel: WeatherDetailsViewModel by activityViewModels()
     private lateinit var progressBar: ProgressBar
+    var mFusedLocationClient: FusedLocationProviderClient? = null
 
     @Inject
     lateinit var weatherForecastAdapter: WeatherForecastAdapter
@@ -59,6 +76,11 @@ class WeatherDetailsFragment : Fragment() {
         fun newInstance() = WeatherDetailsFragment()
     }
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        mFusedLocationClient = LocationServices.getFusedLocationProviderClient(requireActivity())
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -89,7 +111,6 @@ class WeatherDetailsFragment : Fragment() {
     }
 
     private fun observeDataChanges() {
-        weatherDetailsViewModel.getWeatherDetails(18.5919501, 73.7920957)
         weatherDetailsViewModel.currentWeatherLiveData.observe(
             viewLifecycleOwner,
             ResultObserver(
@@ -139,5 +160,85 @@ class WeatherDetailsFragment : Fragment() {
     private fun showWeatherForecastErrorMessage(error: String) {
         tvWeatherForecastError.visibility = View.VISIBLE
         tvWeatherForecastError.text = error
+    }
+
+    /**
+     * Permission callback
+     */
+    private val locationPermissionRequest = registerForActivityResult(
+        ActivityResultContracts.RequestMultiplePermissions()
+    ) { permissions ->
+        if (permissions[Manifest.permission.ACCESS_FINE_LOCATION] == true ||
+            permissions[Manifest.permission.ACCESS_COARSE_LOCATION] == true
+        ) {
+            getLastLocation()
+        } else {
+
+        }
+    }
+
+
+    @SuppressLint("MissingPermission")
+    private fun getLastLocation() {
+        if (isLocationEnabled()) {
+            mFusedLocationClient?.lastLocation?.addOnCompleteListener(requireActivity()) { lastLocation ->
+                if (lastLocation.isSuccessful && lastLocation.result != null) {
+                    val location = lastLocation.result
+
+                    if (location?.latitude != null && location?.longitude != null) {
+                        weatherDetailsViewModel.getWeatherDetails(
+                            location.latitude,
+                            location.longitude
+                        )
+                    }
+
+                    log(TAG, "${location?.latitude} ${location?.longitude}")
+                } else {
+                    log(TAG, lastLocation.exception?.message ?: "")
+                }
+            }
+        } else {
+            activity?.toast(getString(R.string.location_warning))
+            val intent = Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS)
+            startActivity(intent)
+        }
+    }
+
+    private fun isLocationEnabled(): Boolean {
+        val locationManager =
+            activity?.getSystemService(Context.LOCATION_SERVICE) as LocationManager
+        return locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER) || locationManager.isProviderEnabled(
+            LocationManager.NETWORK_PROVIDER
+        )
+    }
+
+    /**
+     * Check permissions and get last location
+     */
+    override fun onResume() {
+        super.onResume()
+        val fineLocationPermission =
+            ContextCompat.checkSelfPermission(
+                requireContext(),
+                Manifest.permission.ACCESS_FINE_LOCATION
+            )
+        val courseLocationPermission =
+            ContextCompat.checkSelfPermission(
+                requireContext(),
+                Manifest.permission.ACCESS_COARSE_LOCATION
+            )
+
+        if (fineLocationPermission == PackageManager.PERMISSION_GRANTED ||
+            courseLocationPermission == PackageManager.PERMISSION_GRANTED
+        ) {
+            getLastLocation()
+        } else {
+            locationPermissionRequest.launch(
+                arrayOf(
+                    Manifest.permission.ACCESS_FINE_LOCATION,
+                    Manifest.permission.ACCESS_COARSE_LOCATION
+                )
+            )
+        }
     }
 }

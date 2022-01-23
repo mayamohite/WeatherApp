@@ -53,7 +53,7 @@ class WeatherRepositoryImpl @Inject constructor(
     ): Result<CurrentWeather> {
         val weatherDetails = localDataSource.getCurrentWeather(latitude, longitude)
         return if (weatherDetails == null) {
-            Result.Error(context.getString(R.string.weather_details_not_available))
+            Result.Error(context.getString(R.string.current_weather_not_available))
         } else {
             Result.Success(weatherDetails)
         }
@@ -65,7 +65,7 @@ class WeatherRepositoryImpl @Inject constructor(
     ): Result<List<ForecastWeather>> {
         val weatherDetails = localDataSource.getWeatherForecast(latitude, longitude)
         return if (weatherDetails == null || weatherDetails.isEmpty()) {
-            Result.Error(context.getString(R.string.weather_details_not_available))
+            Result.Error(context.getString(R.string.weather_forecast_not_available))
         } else {
             Result.Success(weatherDetails)
         }
