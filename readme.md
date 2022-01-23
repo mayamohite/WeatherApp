@@ -25,18 +25,18 @@ Written unit test cases for mappers, repository and database.
 
 | Requirement                  | Status |   
 | :--------------------------: | :----: | 
-| Kotlin Used                  |  [x]   |
-| DI                           |  [x]   |
-| Unit test cases              |  [x]   |
-| Data caching                 |  [x]   |
-| Build variants               |  [x]   |
-| Multi modular architecture   |  [ ]   |
-| Display weather data         |  [x]   |
-| List of weather data         |  [x]   |
-| Search another city          |  [ ]   |
-| Add city to favourite list   |  [ ]   |
-| View favourite city list     |  [ ]   |
-| Change °C to °F              |  [ ]   |
-| Import/Export csv file       |  [ ]   |
-| Weather notification at 6 AM |  [ ]   |
-| View list of favourite cities|  [ ]   |
+| Kotlin Used                  | - [x]  |
+| DI                           | - [x]  |
+| Unit test cases              | - [x]  |
+| Data caching                 | - [x]  |
+| Build variants               | - [x]  |
+| Multi modular architecture   | - [ ]  |
+| Display weather data         | - [x]  |
+| List of weather data         | - [x]  |
+| Search another city          | - [ ]  |
+| Add city to favourite list   | - [ ]  |
+| View favourite city list     | - [ ]  |
+| Change °C to °F              | - [ ]  |
+| Import/Export csv file       | - [ ]  |
+| Weather notification at 6 AM | - [ ]  |
+| View list of favourite cities| - [ ]  |
