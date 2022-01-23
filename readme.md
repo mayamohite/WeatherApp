@@ -1,5 +1,8 @@
 # WeatherApp
 
+
+![weather_app](https://user-images.githubusercontent.com/17182822/150668937-75fedd0e-14b6-40eb-baea-dfa7d00da8d2.png)
+
 WeatherApp is a sample Android application that uses the clean MVVM architecture approach and is written in Kotlin.
 
 ### Used libraries: ###
