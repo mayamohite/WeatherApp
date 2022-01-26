@@ -2,13 +2,17 @@ package com.example.weatherapp.data.local.db.entities
 
 import androidx.room.Entity
 import androidx.room.Ignore
+import androidx.room.Index
 import androidx.room.PrimaryKey
 import com.example.weatherapp.data.remote.response.ForecastResponse
 
 /**
  * Place has 1: Many relation with weather forecast details.
  */
-@Entity(tableName = "WeatherForecast")
+@Entity(
+    tableName = "WeatherForecast",
+    indices = [Index("latitude", "longitude", unique = true)]
+)
 data class WeatherForecastEntity(
     @PrimaryKey
     val cityName: String,
